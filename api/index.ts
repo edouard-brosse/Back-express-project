@@ -33,8 +33,8 @@ const mongoose = require('mongoose');
 
 
 
-//mongoose.connect(process.env.DB_URI)
-mongoose.connect("mongodb+srv://zoroetlufy:Pepito1%26@cluster0.xdapwkb.mongodb.net/")
+mongoose.connect(process.env.DB_URI)
+//mongoose.connect("mongodb+srv://zoroetlufy:Pepito1%26@cluster0.xdapwkb.mongodb.net/")
     .then(() => console.log("Connexion à MongoDB réussie !"))
     .catch((err) => console.log("Connexion à MongoDB échouée !", err));
 
