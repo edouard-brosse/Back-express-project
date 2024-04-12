@@ -6,7 +6,7 @@ const cors = require('cors');
 //const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Express on Vercel fuuck"));
 
 app.listen(3015, () => console.log("Server ready on port 3015."));
 app.use(express.static('public'));
@@ -33,7 +33,8 @@ const mongoose = require('mongoose');
 
 
 
-mongoose.connect(process.env.DB_URI)
+//mongoose.connect(process.env.DB_URI)
+mongoose.connect("mongodb+srv://zoroetlufy:Pepito1%26@cluster0.xdapwkb.mongodb.net/")
     .then(() => console.log("Connexion à MongoDB réussie !"))
     .catch((err) => console.log("Connexion à MongoDB échouée !", err));
 
