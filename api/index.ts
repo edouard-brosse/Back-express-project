@@ -21,6 +21,15 @@ app.use(express.json());
 app.get('/hello', (req, res) => {
   res.send('Hello, World!'); // Renvoyer 'Hello, World!' lorsque la route '/' est accédée
 });
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!'); // Renvoyer 'Hello, World!' lorsque la route '/' est accédée
+  });
+  
   // Démarrage du serveur
 
 
@@ -34,7 +43,6 @@ const mongoose = require('mongoose');
 
 
 mongoose.connect(process.env.DB_URI)
-//mongoose.connect("mongodb+srv://zoroetlufy:Pepito1%26@cluster0.xdapwkb.mongodb.net/")
     .then(() => console.log("Connexion à MongoDB réussie !"))
     .catch((err) => console.log("Connexion à MongoDB échouée !", err));
 
@@ -302,7 +310,8 @@ app.get('/profile', verifyToken, async (req, res) => {
 
 
 
-//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 
 module.exports = app;
