@@ -9,6 +9,7 @@ const app = express();
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.listen(3015, () => console.log("Server ready on port 3015."));
+app.use(express.static('public'));
 
 app.use(cors());
 app.use(express.json());
