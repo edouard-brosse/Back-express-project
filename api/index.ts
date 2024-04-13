@@ -125,28 +125,27 @@ app.post('/login', async (req, res) => {
 
 app.post('/register', async (req, res) => {
     const { email, password, walletAddress } = req.body;
-      console.log("try register email = ", email);
+    console.log("try register email = ", email);
     try {
-        // Vérifier si l'utilisateur existe déjà
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'Un utilisateur avec cet email existe déjà.' });
         }
   
-        // Hacher le mot de passe
         const hashedPassword = await bcrypt.hash(password, 10);
-  
-        // Créer et enregistrer le nouvel utilisateur
         const newUser = new User({ email, password: hashedPassword, walletAddress });
         await newUser.save();
   
         res.status(201).json({ message: 'Utilisateur enregistré avec succès.' });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Erreur lors de la création de l'utilisateur." });
+        if (error.code === 11000) {
+            res.status(400).json({ message: "L'adresse de portefeuille est déjà utilisée par un autre compte ou ne peut être vide." });
+        } else {
+            console.error(error);
+            res.status(500).json({ message: "Erreur lors de la création de l'utilisateur." });
+        }
     }
-    console.log("end register email = ", email);
-});
+  });
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
