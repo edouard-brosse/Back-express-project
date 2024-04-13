@@ -46,13 +46,11 @@ mongoose.connect(process.env.DB_URI)
     .then(() => console.log("Connexion à MongoDB réussie !"))
     .catch((err) => console.log("Connexion à MongoDB échouée !", err));
 
-const userSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    walletAddress: { type: String, required: false,  sparse: true }
-
-    // Ajoutez d'autres champs selon vos besoins
-});
+    const userSchema = new mongoose.Schema({
+        email: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
+        walletAddress: { type: String, unique: true, sparse: true }
+    });
 
 
 
